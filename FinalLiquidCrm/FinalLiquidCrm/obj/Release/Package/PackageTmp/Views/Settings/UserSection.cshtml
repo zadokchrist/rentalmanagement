@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "UserSection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div id="message"></div>
+                <h4 class="card-title">User Department Section Creation</h4>
+                <form class="form-sample" method="post">
+                    <p class="card-description">
+                        Section Details
+                    </p>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Department Name</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="departmentname" required>
+                                        <option selected disabled>Please Select Department Name</option>
+                                        @if (ViewBag.UserDepartments != null)
+                                        {
+                                            foreach (var department in ViewBag.UserDepartments)
+                                            {
+                                                <option value="@department.RecordId">@department.DepartmentName</option>
+                                            }
+                                        }
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Section Name</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" name="sectionname" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="reset" class="btn btn-light" value="Clear" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="submit" class="btn btn-primary" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Message");
+            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+
+

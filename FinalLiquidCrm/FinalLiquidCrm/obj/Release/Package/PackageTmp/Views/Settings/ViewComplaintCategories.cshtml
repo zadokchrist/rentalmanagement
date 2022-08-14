@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "ViewComplaintCategories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Complaints Categories</h4>
+            <form method="post">
+            <div class="col-sm-9">
+                <a href="~/Settings/RegisterComplaintCategory" class="btn btn-primary">Add New Complaint Category</a>
+            </div></form>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="order-listing" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Complaint Category</th>
+                                    <th>Creation Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.Categories != null)
+                                {
+                                    foreach (var categories in ViewBag.Categories)
+                                    {
+                                        <tr>
+                                            <td>@categories.Category</td>
+                                            <td>@categories.RecordDate</td>
+                                            <td>
+                                                <button class="btn btn-outline-primary"><a href="~/Settings/EditCategory?categoryid=@categories.CategoryId">Edit</a></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Message");
+            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+<!-- base:js -->
+<script src="~/import/vendors/base/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="~/import/js/off-canvas.js"></script>
+<script src="~/import/js/hoverable-collapse.js"></script>
+<script src="~/import/js/template.js"></script>
+<script src="~/import/js/settings.js"></script>
+<script src="~/import/js/todolist.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script src="~/import/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="~/import/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script src="~/import/js/data-table.js"></script>
+<!-- End custom js for this page-->

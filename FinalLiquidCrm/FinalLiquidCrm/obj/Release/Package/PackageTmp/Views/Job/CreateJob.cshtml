@@ -1,0 +1,517 @@
+﻿
+@{
+    ViewBag.Title = "CreateJob";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div id="message"></div>
+                <h4 class="card-title">Job Details</h4>
+                <form class="form-sample" method="post">
+                    <p class="card-description">
+                        Job Card info
+                    </p>
+                    <div id="message"></div>
+                    <input type="hidden" name="ticketid" id="ticketid" value="@ViewBag.Ticketid" />
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Job Type</label>
+                                <div class="col-sm-9">
+                                    <select name="jobtype" class="form-control" onchange="changeSelectionJobType()" id="jobtype">
+                                        <option selected disabled>Select Job Type</option>
+                                        <option>Static and Mobile Plant type</option>
+                                        <option>Technical Field Job</option>
+                                        <option>Admin Asset Management</option>
+                                        <option>Meter Installation</option>
+                                        <option>Meter Maintainance</option>
+                                        <option>Quality Assuarance</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Static and mobile jobcard-->
+                    <fieldset id="static_and_mobile">
+
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Area</label>
+                                    <div class="col-sm-3">
+                                        <select name="oparea" class="form-control" onchange="changeAreaSelection()" id="oparea" required>
+                                            <option selected disabled>Select Operational Areas</option>
+                                            @if (ViewBag.OperationalAreas != null)
+                                            {
+                                                foreach (var area in ViewBag.OperationalAreas)
+                                                {
+                                                    <option value="@area.id">@area.name</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-3 col-form-label"><label id="LabelJobtype"><b>Asset Category</b></label></label>
+                                    <div class="col-sm-3">
+                                        <input type="radio" name="assetcategory" class="form-control" id="assetcategory" value="Static">Static
+                                        <input type="radio" name="assetcategory" class="form-control" id="assetcategory" value="Mobile">Mobile
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Asset Location</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="assetloc" class="form-control" id="assetlocation" />
+                                    </div>
+                                    <label class="col-sm-3 col-form-label"><label id="LabelJobtype"><b>Asset Type</b></label></label>
+                                    <div class="col-sm-3">
+                                        <input type="radio" name="assettype" class="form-control" id="assetcategory" value="Electrical">Electrical
+                                        <input type="radio" name="assettype" class="form-control" id="assetcategory" value="Mechanical">Mechanical
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-form-label">Asset Reference</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="assetreference" class="form-control" id="assetreference" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!--End of static and mobile jobcard-->
+                    <!--Technical Field Job Card-->
+                    <fieldset id="technicalfieldjobcard">
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Job Category</label>
+                                    <div class="col-sm-6">
+                                        <input type="radio" name="jobcategory" class="form-control" value="Leakage">Leakage
+                                        <input type="radio" name="jobcategory" class="form-control" value="Burst">Burst
+                                        <input type="radio" name="jobcategory" class="form-control" value="Replacement">Replacement
+                                        <input type="radio" name="jobcategory" class="form-control" value="Maintainance">Maintainance
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <input type="text" name="area" class="form-control" placeholder="Area" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="techbranch" class="form-control" placeholder="Branch">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <input type="text" name="address" class="form-control" placeholder="Address" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!--End of Technical field Job Card-->
+                    <!--Admin Asset Maintainance-->
+                    <fieldset id="adminassetmaintainance">
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Area</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="adminarea" class="form-control" />
+                                    </div>
+                                    <label class="col-sm-3 col-form-label"><label id="LabelJobtype"><b>Asset Category</b></label></label>
+                                    <div class="col-sm-3">
+                                        <input type="radio" name="adminassetcategory" class="form-control" id="assetcategory" value="Civil">Civil
+                                        <input type="radio" name="adminassetcategory" class="form-control" id="assetcategory" value="Electrical">Electrical
+                                        <input type="radio" name="adminassetcategory" class="form-control" id="assetcategory" value="Carpentry">Carpentry
+                                        <input type="radio" name="adminassetcategory" class="form-control" id="assetcategory" value="Electronic">Electronic
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Asset Location</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="adminassetloc" class="form-control" id="assetlocation" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="radio" name="adminassettype" class="form-control" id="assetcategory" placeholder="Asset Type (Specify)">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+
+                                    <label class="col-sm-3 col-form-label">Asset Reference</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="adminassetreference" class="form-control" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <input type="text" name="adminassetdescription" class="form-control" placeholder="descriptionofworks" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!--End of Admin Asset Maintainance-->
+                    `<!--Meter Installation-->
+                    <fieldset id="meterinstallationjobcard">
+
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Job Category</label>
+                                    <div class="col-sm-6">
+                                        <input type="radio" name="meterinstalljobcategory" class="form-control" value="New Connection">New Connection
+                                        <input type="radio" name="meterinstalljobcategory" class="form-control" value="Burst">Replacementc(Defective)
+                                        <input type="radio" name="meterinstalljobcategory" class="form-control" value="Damaged">Damaged
+                                        <input type="radio" name="meterinstalljobcategory" class="form-control" value="Flat Rate">Flat Rate Ac Metering
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <input type="text" name="meterinstarea" class="form-control" placeholder="Area" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="meterinstbranch" class="form-control" placeholder="Branch">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <input type="text" name="meterinstterritory" class="form-control" placeholder="Territory" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="meterinstsubterritory" class="form-control" placeholder="Sub Territory" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <input type="text" name="meterinstmetertype" class="form-control" id="metertype" placeholder="Meter Type" />
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="meterinstmeternum" class="form-control" id="meternum" placeholder="Meter No" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="complainantrefdet">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <div class="col-sm-2">
+                                        <input type="text" name="mireading" class="form-control" id="reading" placeholder="Reading" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!--End of Meter installation-->
+                    <div class="row" id="complainantrefdet">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Y Coordinates</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="ycordinate" class="form-control" id="ycordinate" />
+                                </div>
+                                <label class="col-sm-3 col-form-label">x coordinate</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="xcordinate" class="form-control" id="xcordinate" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="text" name="blockmapref" class="form-control" id="blockmapref" placeholder="Block Map Ref" required /><label style="color:red;">Refer to GIS</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" id="complainantrefdet">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Materials required</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="reqmattype" class="form-control" id="reqmattype" placeholder="Material Type" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" name="reqsize" class="form-control" id="reqsize" placeholder="Size" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" name="reqQty" class="form-control" id="reqQty" placeholder="Qty" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="button" name="size" class="btn btn-primary" value="Add Material" onclick="AddRequiredMaterials()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="table-responsive">
+                                <table class="table" id="requiredmattable">
+                                </table>
+                            </div>
+                        </div>
+                        <hr /><br />
+                    </div>
+                    <div class="row" id="complainantrefdet">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Materials purchased</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="purmattype" class="form-control" id="purmattype" placeholder="Material Type" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" name="purmattype" class="form-control" id="purcsize" placeholder="Size" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" name="purmattype" class="form-control" id="purQty" placeholder="Qty" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" name="purCost" class="form-control" id="purCost" placeholder="Total Cost" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="button" name="size" class="btn btn-primary" value="Add Material" onclick="AddMaterialsPurchased()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="table-responsive">
+                                <table class="table" id="purchasedmattable">
+                                </table>
+                            </div>
+                        </div>
+                        <hr /><br />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="reset" class="btn btn-light" value="Clear" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="submit" class="btn btn-primary" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+                        window.onload = function () {
+
+                            var container = $("#message");
+                            container.html("@ViewBag.Message");
+                            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+
+                            };
+    </script>
+}
+<script type="text/javascript">
+    window.onload = function () {
+
+        $("#static_and_mobile").hide();
+        $("#technicalfieldjobcard").hide();
+        $("#adminassetmaintainance").hide();
+        $("#meterinstallationjobcard").hide();
+    };
+
+    function AddRequiredMaterials() {
+        var materialtype = document.getElementById("reqmattype").value;
+        var matsize = document.getElementById("reqsize").value;
+        var materialqty = document.getElementById("reqQty").value;
+        var ticketidt = document.getElementById("ticketid").value;
+        $.ajax({
+            //base address/controller/Action
+            url: '/Job/AddMaterialsRequired',
+            type: 'GET',
+            data: {
+                //Passing Input parameter
+                ticketid: ticketidt,
+                materialtype: materialtype,
+                materialsize: matsize,
+                qty: materialqty
+            },
+            success: function (result) {
+                var myobject = JSON.parse(result);
+
+                var table = $("#requiredmattable");
+                table.empty();
+                table.append("<table class='table'><thead><tr><th>Material Type</th><th>Size</th></tr><thead>");
+                //< th > Size</th > <th>Quantity</th></tr ></thead > ");
+                //dropdown.append(new Option("-- Select --", 0));
+                table.append("<tbody>")
+                for (var i = 0; i < myobject.length; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    table.append('<tr><td>' + myobject[i]['MaterialType'] + '</td><td>' + myobject[i]['Size'] + '</td></tr>');
+                    //< td > ' + myobject[i]['Size'] + '</td > <td>' + myobject[i]['Qty'] + '</td></tr > ');
+                }
+                table.append("</tbody></table>");
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function AddMaterialsPurchased() {
+        var purmattype = document.getElementById("purmattype").value;
+        var purcsize = document.getElementById("purcsize").value;
+        var purQty = document.getElementById("purQty").value;
+        var totalCost = document.getElementById("purCost").value;
+        var ticketidt = document.getElementById("ticketid").value;
+        $.ajax({
+            //base address/controller/Action
+            url: '/Job/AddMaterialsRequired',
+            type: 'GET',
+            data: {
+                //Passing Input parameter
+                ticketid: ticketidt,
+                materialtype: purmattype,
+                materialsize: purcsize,
+                qty: purQty,
+                cost: totalCost
+            },
+            success: function (result) {
+                var myobject = JSON.parse(result);
+
+                var table = $("#purchasedmattable");
+                table.empty();
+                table.append("<table class='table'><thead><tr><th>Material Type</th><th>Size</th><th>Quantity</th><th>Cost</th></tr><thead>");
+                //< th > Size</th > <th>Quantity</th></tr ></thead > ");
+                //dropdown.append(new Option("-- Select --", 0));
+                table.append("<tbody>")
+                for (var i = 0; i < myobject.length; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    table.append('<tr><td>' + myobject[i]['MaterialType'] + '</td><td>' + myobject[i]['Size'] + '</td><td>' + myobject[i]['Size'] + '</td><td>' + myobject[i]['Qty'] + '</td></tr>');
+                }
+                table.append("</tbody></table>");
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function changeSelectionJobType() {
+        var jobtype = document.getElementById("jobtype").value;
+        if (jobtype == "Static and Mobile Plant type") {
+            $("#static_and_mobile").show();
+            $("#technicalfieldjobcard").hide();
+            $("#adminassetmaintainance").hide();
+            $("#meterinstallationjobcard").hide();
+        } else if (jobtype == "Technical Field Job") {
+            $("#static_and_mobile").hide();
+            $("#technicalfieldjobcard").show();
+            $("#adminassetmaintainance").hide();
+            $("#meterinstallationjobcard").hide();
+        } else if (jobtype == "Admin Asset Management") {
+            $("#static_and_mobile").hide();
+            $("#technicalfieldjobcard").hide();
+            $("#adminassetmaintainance").show();
+            $("#meterinstallationjobcard").hide();
+        } else if (jobtype == "Meter Installation") {
+            $("#static_and_mobile").hide();
+            $("#technicalfieldjobcard").hide();
+            $("#adminassetmaintainance").hide();
+            $("#meterinstallationjobcard").show();
+            document.getElementById("blockmapref").placeholder = "Customer Ref or Property Ref";
+        }
+    }
+</script>
+<!-- base:js -->
+<script src="~/import/vendors/base/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="~/import/js/off-canvas.js"></script>
+<script src="~/import/js/hoverable-collapse.js"></script>
+<script src="~/import/js/template.js"></script>
+<script src="~/import/js/settings.js"></script>
+<script src="~/import/js/todolist.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script src="~/import/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="~/import/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script src="~/import/js/data-table.js"></script>
+<!-- End custom js for this page-->

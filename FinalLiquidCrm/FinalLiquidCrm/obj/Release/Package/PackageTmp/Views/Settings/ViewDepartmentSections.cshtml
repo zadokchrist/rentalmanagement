@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "ViewDepartmentSections";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">User Sections</h4>
+            <form method="post">
+                <div class="col-sm-9">
+                    <a href="~/Settings/UserSection" class="btn btn-primary">Add User Section</a>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="order-listing" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Section Name</th>
+                                    <th>Department Name</th>
+                                    <th>RecordDate</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.UserSections != null)
+                                {
+                                    foreach (var department in ViewBag.UserSections)
+                                    {
+                                        <tr>
+                                            <td>@department.SectionName</td>
+                                            <td>@department.DepartmentId</td>
+                                            <td>@department.RecordDate</td>
+                                            <td>
+                                                <a href="~/Settings/EditUserSection?sectionid=@department.SectionId" class="btn btn-outline-primary">Edit</a>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Message");
+            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+<!-- base:js -->
+<script src="~/import/vendors/base/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="~/import/js/off-canvas.js"></script>
+<script src="~/import/js/hoverable-collapse.js"></script>
+<script src="~/import/js/template.js"></script>
+<script src="~/import/js/settings.js"></script>
+<script src="~/import/js/todolist.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script src="~/import/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="~/import/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script src="~/import/js/data-table.js"></script>
+<!-- End custom js for this page-->

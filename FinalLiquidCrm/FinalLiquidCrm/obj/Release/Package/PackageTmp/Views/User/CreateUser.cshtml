@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "CreateUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="col-12 grid-margin">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Create User</h4>
+                    <p class="card-description">
+                        User Creation
+                    </p>
+                    <div id="message"></div>
+                    <form class="forms-sample" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputName1">Name</label>
+                            <input type="text" class="form-control" id="exampleInputName1" name="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail3" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelectGender">Designation</label>
+                            <input type="text" class="form-control" name="designation" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelectGender">Department</label>
+                            <select class="form-control" id="department" name="depart" onchange="changeSelection()" >
+                                <option selected disabled>Select Department</option>
+                                @if (@ViewBag.UserDepartments != null)
+                                {
+                                    foreach (var department in ViewBag.UserDepartments)
+                                    {
+                                        <option value="@department.RecordId">@department.DepartmentName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelectGender">User Section</label>
+                            <select class="form-control" id="usersect" name="usersect">
+                                
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Message");
+            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+            };
+    </script>
+    
+}
+<script type="text/javascript">
+    function changeSelection() {
+        var departmentid = document.getElementById("department").value;
+        $.ajax({
+            //base address/controller/Action
+            url: '/User/GetDepartmentSection',
+            type: 'GET',
+            data: {
+                //Passing Input parameter
+                sectionid: departmentid//$('#txtId').val()
+            },
+            success: function (result) {
+                var myobject = JSON.parse(result);
+                var dropdown = $("#usersect");
+                dropdown.empty();
+                dropdown.append(new Option("-- Select User Section--", 0));
+                for (var i = 0; i < myobject.length; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    dropdown.append('<option value="' + myobject[i]['SectionId'] + '">' + myobject[i]['SectionName'] + '</option>');
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+</script>
+

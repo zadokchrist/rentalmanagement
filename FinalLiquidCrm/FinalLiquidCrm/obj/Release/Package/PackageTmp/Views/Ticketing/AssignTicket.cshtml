@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "AssignTicket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div id="message"></div>
+
+                <h4 class="card-title">Customer Complaint Assignment form</h4>
+                <a href="~/Ticketing/ViewTickets" class="btn btn-primary mr-2">GO BACK</a>
+                <p class="card-description">
+                    Please assign this ticket to a department
+                </p>
+                <form class="forms-sample" method="post">
+
+                    <div class="form-group">
+
+                        <input class="form-control" type="hidden" value="@ViewBag.TicketId" name="ticketId" />
+                        <label for="exampleSelectGender">Select Department</label>
+                        <select class="form-control" name="todepart" id="department" onchange="changeSelection()">
+
+                            <option selected disabled>Select Department to assign to</option>
+                            @if (ViewBag.UserDepartments != null)
+                            {
+                                foreach (var department in ViewBag.UserDepartments)
+                                {
+                                    <option value="@department.DepartmentName">@department.DepartmentName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelectGender">User Section</label>
+                        <select class="form-control" id="usersect" name="usersect">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelectGender">Reason for assignment</label>
+                        <textarea class="form-control" name="reason"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Message");
+            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+<script type="text/javascript">
+    function changeSelection() {
+        var departmentid = document.getElementById("department").value;
+        $.ajax({
+            //base address/controller/Action
+            url: '/User/GetDepartmentSection',
+            type: 'GET',
+            data: {
+                //Passing Input parameter
+                sectionid: departmentid//$('#txtId').val()
+            },
+            success: function (result) {
+                var myobject = JSON.parse(result);
+                var dropdown = $("#usersect");
+                dropdown.empty();
+                dropdown.append(new Option("-- Select User Section--", 0));
+                for (var i = 0; i < myobject.length; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    dropdown.append('<option value="' + myobject[i]['SectionId'] + '">' + myobject[i]['SectionName'] + '</option>');
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+</script>
+

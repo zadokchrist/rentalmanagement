@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewBag.Title = "TicketDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div id="message"></div>
+                <h4 class="card-title">Ticket Resolution Details</h4>
+                <form class="form-sample" method="post">
+                    <p class="card-description">
+                        Ticket info
+                    </p>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <a href="~/Ticketing/ViewTickets" class="btn btn-primary mr-2">GO BACK</a>
+                                <div class="col-sm-9">
+                                    <input type="hidden" name="ticket_id" value="@ViewBag.Ticket[0].ticket_id" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Source Of Complaint</label>
+                                <div class="col-sm-9">
+                                    <input type="text" value="@ViewBag.Ticket[0].ComplaintSource" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Customer Email</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" name="phonecontact" value="@ViewBag.Ticket[0].email_id" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Customer Phone</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" name="phonecontact" value="@ViewBag.Ticket[0].CustContact" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Priority</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" name="phonecontact" value="@ViewBag.Ticket[0].prioprity" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Ticket Details</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" name="tickdet" readonly>@ViewBag.Ticket[0].TicketDetails</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Resolution Details</label>
+                                <div class="col-sm-9">
+                                    <textarea name="resolution" class="form-control" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="reset" class="btn btn-light" value="Clear" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="submit" class="btn btn-primary" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Audit trail for Ticket Resolution</h4>
+                        <p class="card-description">ApplicationId <code>@ViewBag.Ticket[0].ticket_id</code></p>
+                        <div class="row">
+                            <div class="table-sorter-wrapper col-lg-12 table-responsive">
+                                <table id="sortable-table-2" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="sortStyle">Status<i class="mdi mdi-chevron-down"></i></th>
+                                            <th class="sortStyle">EscalatedTo<i class="mdi mdi-chevron-down"></i></th>
+                                            <th class="sortStyle">ResolutionDetails<i class="mdi mdi-chevron-down"></i></th>
+                                            <th class="sortStyle">RecordedBy<i class="mdi mdi-chevron-down"></i></th>
+                                            <th class="sortStyle">Date Resolved<i class="mdi mdi-chevron-down"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (ViewBag.TicketResolutionSearch != null)
+                                        {
+                                            foreach (var ticketresolution in ViewBag.TicketResolutionSearch)
+                                            {
+                                        <tr>
+                                            <td>
+                                                @ticketresolution.RecordId
+                                            </td>
+                                            <td>
+                                                @ticketresolution.Status
+                                            </td>
+                                            <td>
+                                                @ticketresolution.EscalatedTo
+                                            </td>
+                                            <td>
+                                                @ticketresolution.ResolutionDetails
+                                            </td>
+                                            <td>
+                                                @ticketresolution.RecordedBy
+                                            </td>
+                                            <td>
+                                                @ticketresolution.RecordDate
+                                            </td>
+                                        </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Message");
+            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+
+

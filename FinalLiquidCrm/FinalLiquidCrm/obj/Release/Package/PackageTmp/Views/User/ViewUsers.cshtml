@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "ViewUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">View Users</h4>
+            <div id="message"></div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="order-listing" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>User Department</th>
+                                    <th>User Email</th>
+                                    <th>User Name</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.SystemUsers != null)
+                                {
+                                    foreach (var users in ViewBag.SystemUsers)
+                                    {
+                                        <tr>
+                                            <td>@users.FullName</td>
+                                            <td>@users.UserCompany</td>
+                                            <td>@users.UserEmail</td>
+                                            <td>@users.Username</td>
+                                            <td>
+                                                @if (users.Active)
+                                                {
+                                                    <label class="badge badge-success">@users.Active</label>
+                                                }
+                                                else if (!users.Active)
+                                                {
+                                                    <label class="badge badge-danger">@users.Active</label>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (users.Active)
+                                                {
+                                                    <button class="btn btn-outline-primary"><a href="~/User/DeactivateActivateResetUser?username=@users.Username&activity=deactivate">Deactivate</a></button>
+                                                }
+                                                else if (!users.Active)
+                                                {
+                                                    <button class="btn btn-outline-primary"><a href="~/User/DeactivateActivateResetUser?username=@users.Username&activity=activate">Activate</a></button>
+                                                }
+                                                <button class="btn btn-outline-warning"><a href="~/User/DeactivateActivateResetUser?username=@users.Username&activity=reset">Reset Password</a></button>
+                                                <button class="btn btn-outline-primary"><a href="~/User/EditUser?username=@users.Username">Edit</a></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Message");
+            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+<!-- base:js -->
+<script src="~/import/vendors/base/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="~/import/js/off-canvas.js"></script>
+<script src="~/import/js/hoverable-collapse.js"></script>
+<script src="~/import/js/template.js"></script>
+<script src="~/import/js/settings.js"></script>
+<script src="~/import/js/todolist.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script src="~/import/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="~/import/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script src="~/import/js/data-table.js"></script>
+<!-- End custom js for this page-->

@@ -1,0 +1,110 @@
+﻿<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <div class="nav-link d-flex">
+                <div class="profile-image">
+                    <img src="https://via.placeholder.com/37x37" alt="image">
+                </div>
+                <div class="profile-name">
+                    <p class="name">
+                        @Session["FullName"].ToString()
+                    </p>
+                    <p class="designation">
+                        @Session["UserDepartment"].ToString()
+                    </p>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="~/Admin/AdminDashboard">
+                <i class="mdi mdi-shield-check menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+            </a>
+        </li>
+        @if (Session["UserRole"].ToString().Equals("1"))
+        {
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                    <i class="mdi mdi-view-array menu-icon"></i>
+                    <span class="menu-title">User Management</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="~/User/CreateUser">Create Users</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="~/User/ViewUsers">View Users</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#sdusupport" aria-expanded="false" aria-controls="form-elements">
+                    <i class="mdi mdi-view-headline menu-icon"></i>
+                    <span class="menu-title">Settings</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="sdusupport">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="~/Settings/ViewComplaintCategories">Complaints Category</a></li>
+                        <li class="nav-item"><a class="nav-link" href="~/Settings/ViewComplaintSubCategory">Complaints Details</a></li>
+                        <li class="nav-item"><a class="nav-link" href="~/Settings/ViewUserDepartments">User Department</a></li>
+                        <li class="nav-item"><a class="nav-link" href="~/Settings/ViewDepartmentSections">Department Sections</a></li>
+                        <li class="nav-item"><a class="nav-link" href="~/Landlord/ViewLandlords">Land Lords</a></li>
+                        <li class="nav-item"><a class="nav-link" href="~/Settings/ViewDepartmentSections">Properties</a></li>
+                        <li class="nav-item"><a class="nav-link" href="~/Settings/ViewDepartmentSections">Tenants</a></li>
+                        <li class="nav-item"><a class="nav-link" href="~/Settings/ViewDepartmentSections">Payments</a></li>
+                    </ul>
+                </div>
+            </li>
+        }
+        @*<li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#jobmodule" aria-expanded="false" aria-controls="form-elements">
+                <i class="mdi mdi-view-headline menu-icon"></i>
+                <span class="menu-title">Job Cards</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="jobmodule">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="~/Job/ViewJobs">Job Report</a></li>
+                </ul>
+            </div>
+        </li>*@
+        @*<li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#sdusupport" aria-expanded="false" aria-controls="form-elements">
+                <i class="mdi mdi-view-headline menu-icon"></i>
+                <span class="menu-title">Reports</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="sdusupport">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="~/Reports/ComplaintReport">Complaints Report</a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Reports/AuditReport">Activity Report</a></li>
+                </ul>
+            </div>
+        </li>*@
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#customercare" aria-expanded="false" aria-controls="form-elements">
+                <i class="mdi mdi-view-headline menu-icon"></i>
+                <span class="menu-title">Customer Care</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="customercare">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="~/Ticketing/CreateTicket">Register Complaint</a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Ticketing/ViewTickets">View Complaints</a></li>
+                </ul>
+            </div>
+        </li>
+        @*<li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#manual" aria-expanded="false" aria-controls="form-elements">
+                <i class="mdi mdi-view-headline menu-icon"></i>
+                <span class="menu-title">User Manuals</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="manual">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="~/manual/OGSWC_CRM_USERMANUAL.pdf" target="_blank">Crm Manual</a></li>
+                </ul>
+            </div>
+        </li>*@
+    </ul>
+</nav>

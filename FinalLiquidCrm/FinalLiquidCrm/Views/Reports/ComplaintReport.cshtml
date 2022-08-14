@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "ComplaintReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Data table</h4>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table id="order-listing" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Complaint Sub Category</th>
+                                    <th>Area</th>
+                                    <th>Branch</th>
+                                    <th>Status</th>
+                                    <th>Complaint Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.Tickets != null)
+                                {
+                                    foreach (var ticket in ViewBag.Tickets)
+                                    {
+                                        <tr>
+                                            <td>@ticket.ComplaintSubCategory</td>
+                                            <td>@ticket.AreaName</td>
+                                            <td>@ticket.BranchName</td>
+                                            <td>
+                                                @if (@ticket.status.Equals("RESOLVED"))
+                                                {
+                                                    <label class="badge badge-success">@ticket.status</label>
+                                                }
+                                                else if (@ticket.status.Equals("ESCALATED"))
+                                                {
+                                                    <label class="badge badge-danger">@ticket.status</label>
+                                                }
+                                                else
+                                                {
+                                                    <label class="badge badge-warning">@ticket.status</label>
+                                                }
+                                            </td>
+                                            <td>@ticket.posting_date</td>
+                                            <td>
+                                                <button class="btn btn-outline-primary"><a href="~/Ticketing/TicketDetails?ticketid=@ticket.ticket_id"> View</a></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Message");
+            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+<!-- base:js -->
+<script src="~/import/vendors/base/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="~/import/js/off-canvas.js"></script>
+<script src="~/import/js/hoverable-collapse.js"></script>
+<script src="~/import/js/template.js"></script>
+<script src="~/import/js/settings.js"></script>
+<script src="~/import/js/todolist.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script src="~/import/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="~/import/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script src="~/import/js/data-table.js"></script>
+<!-- End custom js for this page-->

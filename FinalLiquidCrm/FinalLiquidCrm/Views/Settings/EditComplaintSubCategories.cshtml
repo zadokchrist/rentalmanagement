@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "EditComplaintSubCategories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div id="message"></div>
+                <h4 class="card-title">Complaint Sub Category Details</h4>
+                <div class="col-sm-9">
+                    <a href="~/Settings/ViewComplaintSubCategory" class="btn btn-primary">Back</a>
+                </div>
+                @if (ViewBag.SubCategories != null)
+                {
+                    <form class="form-sample" method="post">
+                        <p class="card-description">
+                            Complaint Category info
+                        </p>
+                        <input type="hidden" value="@ViewBag.SubCategories[0].SubCategoryId" name="subcategoryid" />
+                        @*<div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Complaint Category</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="category" required>
+                                            <option disabled>Select Category</option>
+                                            @if (ViewBag.Categories != null)
+                                            {
+                                                foreach (var categories in ViewBag.Categories)
+                                                {
+                                                    <option value="@categories.CategoryId">@categories.Category</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Complaint Sub Category</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" name="subcategory" value="@ViewBag.SubCategories[0].SubCategoryName" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-9">
+                                        <input type="reset" class="btn btn-light" value="Clear" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-9">
+                                        <input type="submit" class="btn btn-primary" value="Submit" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Message");
+            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+

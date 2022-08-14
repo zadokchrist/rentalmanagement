@@ -1,0 +1,25 @@
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.dll.config
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.dll
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.pdb
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.csproj.CoreCompileInputs.cache
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.csproj.CopyComplete
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.dll
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.pdb
+D:\Projects\Code\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.csprojAssemblyReference.cache
+D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.dll.config
+D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.dll
+D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.pdb
+D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.csproj.CoreCompileInputs.cache
+D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.csproj.CopyComplete
+D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.dll
+D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.pdb
+D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.csproj.AssemblyReference.cache
+D:\Projects\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.dll.config
+D:\Projects\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.dll
+D:\Projects\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.pdb
+D:\Projects\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.csproj.CoreCompileInputs.cache
+D:\Projects\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.dll
+D:\Projects\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.pdb

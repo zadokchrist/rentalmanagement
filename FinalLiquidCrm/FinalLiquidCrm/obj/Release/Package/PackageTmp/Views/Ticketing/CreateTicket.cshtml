@@ -1,0 +1,399 @@
+﻿
+@{
+    ViewBag.Title = "CreateTicket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div id="message"></div>
+                <h4 class="card-title">Complaint Details</h4>
+                <form class="form-sample" method="post">
+                    <p class="card-description">
+                        Complaint info
+                    </p>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Complainant Type</label>
+                                <div class="col-sm-9">
+                                    <select name="comptype" class="form-control" onchange="changeSelectionCompType()" id="comptype" required>
+                                        <option selected disabled>Select Complainant Type</option>
+                                        <option value="Registered">Registered</option>
+                                        <option value="None Registered">None Registered</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="complainantrefdet">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Complainant Ref/Property Ref</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="complainantref" class="form-control" id="complainatref" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="complainantdetquery">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="button" class="btn btn-primary" onclick="querycustomerdetails()" value="Query Customer Details" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="complainantrname">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Complainant Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="custname" class="form-control" id="custname" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Area</label>
+                                <div class="col-sm-9">
+                                    <select name="oparea" class="form-control" onchange="changeAreaSelection()" id="oparea" required>
+                                        @*<option selected disabled>Select Operational Areas</option>*@
+                                        @*@if (ViewBag.OperationalAreas != null)
+                                        {
+                                            foreach (var area in ViewBag.OperationalAreas)
+                                            {
+                                                <option value="@area.id">@area.name</option>
+                                            }
+                                        }*@
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Branch</label>
+                                <div class="col-sm-9">
+                                    <select name="branch" class="form-control" id="branch" required>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Source Of Complaint</label>
+                                <div class="col-sm-9">
+                                    <select name="ticketsrc" class="form-control" required>
+                                        <option selected disabled>--Select--</option>
+                                        <option value="Facebook">Facebook</option>
+                                        <option value="Letter">Letter</option>
+                                        <option value="Sms">Sms</option>
+                                        <option value="In Person">In Person</option>
+                                        <option value="WhatsApp">WhatsApp</option>
+                                        <option value="Twitter">Twitter</option>
+                                        <option value="Phone Call">Phone Call</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Complaint Category</label>
+                                <div class="col-sm-9">
+                                    <select name="compcategory" class="form-control" onchange="changeSelection()" id="category" required>
+                                        <option selected disabled>Select Category</option>
+                                        @if (ViewBag.Categories != null)
+                                        {
+                                            foreach (var categories in ViewBag.Categories)
+                                            {
+                                                <option value="@categories.CategoryId">@categories.Category</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Complaint Sub Category</label>
+                                <div class="col-sm-9">
+                                    <select name="subcategory" class="form-control" id="subcategory" required>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Territory</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" name="territory" id="territory" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Telephone</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" name="custcontact" id="custcontact" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Email Contact</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" name="emailcontact" id="emailcontact" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Address</label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" name="address" id="address" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Priority</label>
+                                <div class="col-sm-9">
+                                    <select name="priority" class="form-control" required>
+                                        <option selected disabled>Please select Priority</option>
+                                        <option value="High">High</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="Low">Low</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Complaint Details</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" name="tickdet" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="reset" class="btn btn-light" value="Clear" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="submit" class="btn btn-primary" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = $("#message");
+            container.html("@ViewBag.Error");
+            container.attr("style", "color: red;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            
+            var container = $("#message");
+            container.html("@ViewBag.Message");
+            container.attr("style", "color: green;text-align: center;;"); //add a style attribute
+            };
+    </script>
+}
+<script type="text/javascript">
+    
+    function changeAreaSelection() {
+        var operationareas = document.getElementById("oparea").value;
+        $.ajax({
+            //base address/controller/Action
+            url: '/Ticketing/GetBranchesByOpsId',
+            type: 'GET',
+            data: {
+                //Passing Input parameter
+                opsid: operationareas//$('#txtId').val()
+            },
+            success: function (result) {
+                var myobject = JSON.parse(result);
+                var dropdown = $("#branch");
+                dropdown.empty();
+                dropdown.append(new Option("-- Select --", 0));
+                for (var i = 0; i < myobject.length; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    dropdown.append('<option value="' + myobject[i]['id'] + '">' + myobject[i]['name'] + '</option>');
+                }
+            },
+            error: function (result) {
+
+                alert("error");
+            }
+        });
+    }
+    function changeSelection() {
+        var category = document.getElementById("category").value;
+        $.ajax({
+            //base address/controller/Action
+            url: '/Settings/GetComplaintSubCategoriesByid',
+            type: 'GET',
+            data: {
+                //Passing Input parameter
+                subcategoryid: category//$('#txtId').val()
+            },
+            success: function (result) {
+                var myobject = JSON.parse(result);
+                var dropdown = $("#subcategory");
+                dropdown.empty();
+                dropdown.append(new Option("-- Select --", 0));
+                for (var i = 0; i < myobject.length; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    dropdown.append('<option value="' + myobject[i]['SubCategoryId'] + '">' + myobject[i]['SubCategoryName'] + '</option>');
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+
+    function GetOperationalAreas() {
+        var selection = document.getElementById("comptype").value;
+        if (selection == 'Registered') {
+
+        } else
+        {
+            $.ajax({
+                //base address/controller/Action
+                url: '/Ticketing/GetOperationAreas',
+                type: 'GET',
+                data: {
+                    //Passing Input parameter
+                    id: "10"
+                },
+                success: function (result) {
+                    var myobject = JSON.parse(result);
+                    var dropdown = $("#oparea");
+                    dropdown.empty();
+                    dropdown.append(new Option("-- Select --", 0));
+                    for (var i = 0; i < myobject.length; i++) {
+                        // POPULATE SELECT ELEMENT WITH JSON.
+                        dropdown.append('<option value="' + myobject[i]['id'] + '">' + myobject[i]['name'] + '</option>');
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+        
+    }
+
+    function changeSelectionCompType() {
+        var comptype = document.getElementById("comptype").value;
+        if (comptype == "Registered") {
+            $("#complainantrefdet").show();
+           // $("#complainantrname").show();
+            $("#complainantdetquery").show();
+        } else {
+            GetOperationalAreas();
+            $("#complainantrefdet").hide();
+           // $("#complainantrname").hide();
+            $("#complainantdetquery").hide();
+        }
+    }
+
+    function querycustomerdetails() {
+        var complainatref = document.getElementById("complainatref").value;
+        if (complainatref=="") {
+            var container = $("#message");
+            container.html("Please Enter Customer Reference");
+            container.attr("style", "color: red;text-align: center;;");
+        } else {
+            $.ajax({
+                //base address/controller/Action
+                url: '/Ticketing/GetComplaintSubCategoriesByid',
+                type: 'GET',
+                data: {
+                    //Passing Input parameter
+                    CustRef: complainatref//$('#txtId').val()
+                },
+                success: function (result) {
+                    var myobject = JSON.parse(result);
+                    if (myobject == null) {
+                        var container = $("#message");
+                        container.html("No customer found with reference " + complainatref);
+                        container.attr("style", "color: red;text-align: center;;");
+                    } else {
+                        document.getElementById("custname").value = myobject[0]['customerName'];
+                        document.getElementById("emailcontact").value = myobject[0]['custEmail'];
+                        document.getElementById("custcontact").value = myobject[0]['phoneNo1'];
+                        //document.getElementById("area").value = myobject[0]['Area'];
+                        //document.getElementById("branch").value = myobject[0]['branch'];
+                        var dropdownarea = $("#oparea");
+                        dropdownarea.empty();
+                        dropdownarea.append(new Option(myobject[0]['Area'], myobject[0]['AreaId']));
+
+                        //dropdownarea.append('<option value="' + myobject[0]['Area'] + '">' + myobject[i]['Area'] + '</option>');
+                        var dropdownbranch = $("#branch");
+                        dropdownbranch.empty();
+                        dropdownbranch.append(new Option(myobject[0]['Branch'], myobject[0]['BranchId']));
+                        //document.getElementById("custname").disabled = true;
+                        //document.getElementById("emailcontact").disabled = true;
+                        //document.getElementById("custcontact").disabled = true;
+                    }
+                    
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+        
+    }
+</script>
