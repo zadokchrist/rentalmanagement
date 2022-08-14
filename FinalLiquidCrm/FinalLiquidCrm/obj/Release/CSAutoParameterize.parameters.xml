@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="testcrmconstring-Web.config Connection String" description="testcrmconstring Connection String used in web.config by the application to access the database." defaultValue="Data Source=oguncrmdb.cdzgyilazyin.us-east-2.rds.amazonaws.com;Initial Catalog=OgunCrmDb;user id=oguncrm;password=T3rr1613;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\working\ directory\\liquidcrm\\FinalLiquidCrm\\FinalLiquidCrm\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='testcrmconstring']/@connectionString" />
-  </parameter>
-  <parameter name="billingdb-Web.config Connection String" description="billingdb Connection String used in web.config by the application to access the database." defaultValue="Data Source=oguncrmdb.cdzgyilazyin.us-east-2.rds.amazonaws.com;Initial Catalog=OgunBillingDb;user id=oguncrm;password=T3rr1613;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\working\ directory\\liquidcrm\\FinalLiquidCrm\\FinalLiquidCrm\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='billingdb']/@connectionString" />
+  <parameter name="testcrmconstring-Web.config Connection String" description="testcrmconstring Connection String used in web.config by the application to access the database." defaultValue="Data Source=oguncrmdb.cdzgyilazyin.us-east-2.rds.amazonaws.com;Initial Catalog=RealEstateManagementDb;user id=oguncrm;password=T3rr1613;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\khp\\rentalmanagement\\FinalLiquidCrm\\FinalLiquidCrm\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='testcrmconstring']/@connectionString" />
   </parameter>
 </parameters>
