@@ -61,6 +61,12 @@ namespace LiquidLogic.Logic
             DbConnection.ExecuteNonQuery(command);
         }
 
+        internal void AddProperty(string landLordId, string pRN, string propertyLoc, string longtitude, string latitude,string TotalRooms)
+        {
+            command = DbConnection.GetStoredProcCommand("AddProperty", landLordId, pRN, propertyLoc, longtitude, latitude, TotalRooms);
+            DbConnection.ExecuteNonQuery(command);
+        }
+
         internal void AddLandlord(string name, string email, string tel)
         {
             command = DbConnection.GetStoredProcCommand("AddLandlord", name, email, tel);
@@ -71,6 +77,13 @@ namespace LiquidLogic.Logic
         {
             command = DbConnection.GetStoredProcCommand("CreateJobCard", ticketId, jobType, oppArea, branch, territory, subTerritory, assetCategory, assetDescription, assetLocation, assetReference, jobCategory, address, assetType, ycordinates, xcordinates, blockMapRef);
             DbConnection.ExecuteNonQuery(command);
+        }
+
+        internal DataTable GetProperties(string landLordId)
+        {
+            command = DbConnection.GetStoredProcCommand("GetProperties", landLordId);
+            returntable = DbConnection.ExecuteDataSet(command).Tables[0];
+            return returntable;
         }
 
         internal DataTable GetJobCards()

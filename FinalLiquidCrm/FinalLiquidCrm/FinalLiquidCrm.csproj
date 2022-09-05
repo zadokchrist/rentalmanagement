@@ -163,6 +163,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\LandlordController.cs" />
+    <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TicketingController.cs" />
@@ -2092,6 +2093,8 @@
     <Content Include="Views\Job\ViewJobs.cshtml" />
     <Content Include="Views\Landlord\ViewLandlords.cshtml" />
     <Content Include="Views\Landlord\AddLandlord.cshtml" />
+    <Content Include="Views\Property\ViewProperties.cshtml" />
+    <Content Include="Views\Property\AddProperty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -84,6 +84,7 @@
     <Compile Include="Models\JobCardResponse.cs" />
     <Compile Include="Models\LandLord.cs" />
     <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\Property.cs" />
     <Compile Include="Models\SectionResponse.cs" />
     <Compile Include="Models\SystemUser.cs" />
     <Compile Include="Models\Ticket.cs" />

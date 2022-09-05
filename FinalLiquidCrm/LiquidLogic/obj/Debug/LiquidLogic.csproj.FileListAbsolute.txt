@@ -16,7 +16,6 @@ D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.
 D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.csproj.CopyComplete
 D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.dll
 D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.pdb
-D:\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\obj\Debug\LiquidLogic.csproj.AssemblyReference.cache
 D:\Projects\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.dll.config
 D:\Projects\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.dll
 D:\Projects\working directory\liquidcrm\FinalLiquidCrm\LiquidLogic\bin\Debug\LiquidLogic.pdb

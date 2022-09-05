@@ -69,5 +69,61 @@ namespace LiquidLogic.Logic
             }
             return response;
         }
+
+        public GenericResponse AddProperty(Property property)
+        {
+            GenericResponse response = new GenericResponse();
+            try
+            {
+                dh.AddProperty(property.LandLordId,property.PRN,property.PropertyLoc,property.Longtitude,property.Latitude,property.TotalRooms);
+                response.IsSuccessfull = true;
+                response.Message = "PROPERTY ADDED SUCCESSFULLY";
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccessfull=false;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
+
+        public GenericResponse GetProperties(Property property)
+        {
+            GenericResponse response = new GenericResponse();
+            try
+            {
+                table = dh.GetProperties(property.LandLordId);
+                if (table.Rows.Count>0)
+                {
+                    List<object> properties = new List<object>();
+                    foreach (DataRow dr in table.Rows)
+                    {
+                        Property property1 = new Property();
+                        property1.PropertyId = dr["PropertyId"].ToString();
+                        property1.LandLordId = dr["LandLordId"].ToString();
+                        property1.PRN = dr["PRN"].ToString();
+                        property1.PropertyLoc = dr["PropertyLoc"].ToString();
+                        property1.Longtitude = dr["Longtitude"].ToString();
+                        property1.Latitude = dr["Latitude"].ToString();
+                        property1.CreationDate = dr["CreationDate"].ToString();
+                        properties.Add(property1);
+                    }
+                    response.list = properties;
+                    response.IsSuccessfull = true;
+                    response.Message = "SUCCESS";
+                }
+                else
+                {
+                    response.IsSuccessfull = false;
+                    response.Message = "NO PROPERTY FOUND FOR THE LANDLORD";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccessfull = false;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
     }
 }
