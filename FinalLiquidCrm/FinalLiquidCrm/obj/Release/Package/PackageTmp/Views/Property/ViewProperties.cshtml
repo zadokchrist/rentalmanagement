@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ViewLandlords";
+    ViewBag.Title = "ViewProperties";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
         <div class="card-body">
             <h4 class="card-title">View Landlords</h4>
             <div class="col-sm-9">
-                <a href="~/Landlord/AddLandlord" class="btn btn-primary"> Add Landlord</a>
+                <a href="~/Property/AddProperty?LandloadId=@ViewBag.Landlordid&view=2" class="btn btn-primary"> Add Property</a>
             </div>
             <div id="message"></div>
             <div class="row">
@@ -18,51 +18,34 @@
                         <table id="order-listing" class="table">
                             <thead>
                                 <tr>
-                                    <th>LandLord id</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Telephone</th>
-                                    <th>Active</th>
+                                    <th>Property id</th>
+                                    <th>LandLordId</th>
+                                    <th>Property Reference</th>
+                                    <th>Longtitude</th>
+                                    <th>Latitude</th>
                                     <th>Date Created</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (ViewBag.LandLords != null)
+                                @if (ViewBag.Properties != null)
                                 {
-                                    foreach (var landlord in ViewBag.LandLords)
+                                    foreach (var property in ViewBag.Properties)
                                     {
-                                        <tr>
-                                            <td>@landlord.id</td>
-                                            <td>@landlord.name</td>
-                                            <td>@landlord.email</td>
-                                            <td>@landlord.tel</td>
-                                            <td>
-                                                @if (landlord.active)
-                                                {
-                                                    <label class="badge badge-success">@landlord.active</label>
-                                                }
-                                                else if (!landlord.Active)
-                                                {
-                                                    <label class="badge badge-danger">@landlord.active</label>
-                                                }
-                                            </td>
-                                            <td>
-                                                @landlord.creationdate
-                                            </td>
-                                            <td>
-                                                @if (landlord.active)
-                                                {
-                                                    <button class="btn btn-outline-primary"><a href="~/User/DeactivateActivateResetUser?username=@landlord.id&activity=deactivate">Terminate Contract</a></button>
-                                                    <button class="btn btn-outline-primary"><a href="~/Property/ViewProperties?LandloadId=@landlord.id">View Properties</a></button>
-                                                }
-                                                else if (!landlord.active)
-                                                {
-                                                    <button class="btn btn-outline-primary"><a href="~/User/DeactivateActivateResetUser?username=@landlord.id&activity=activate">Activate</a></button>
-                                                }
-                                                <button class="btn btn-outline-primary"><a href="~/User/EditUser?username=@landlord.id">Edit</a></button>
-                                            </td>
-                                        </tr>
+                                <tr>
+                                    <td>@property.PropertyId</td>
+                                    <td>@property.LandLordId</td>
+                                    <td>@property.PRN</td>
+                                    <td>@property.Longtitude</td>
+                                    <td>@property.Latitude</td>
+                                    <td>
+                                        @property.CreationDate
+                                    </td>
+                                    <td>
+                                        
+                                        <button class="btn btn-outline-primary"><a href="~/User/EditUser?username=@property.PropertyId">Edit</a></button>
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>
@@ -95,7 +78,7 @@
 }
 
 <script>
-    $(document).ready(function (){
+    $(document).ready(function () {
         $('#order-listing').DataTable({
             dom: 'Bfrtip',
             buttons: [
