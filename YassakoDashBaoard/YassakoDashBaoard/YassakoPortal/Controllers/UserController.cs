@@ -11,7 +11,32 @@ namespace YassakoPortal.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View();
+            if (Session["FullName"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                try
+                {
+                    YassakoPortalLogic.Models.UserDepartments userDepartments = new YassakoPortalLogic.Models.UserDepartments();
+                    YassakoPortalLogic.Logic.UserProcessor userProcessor = new YassakoPortalLogic.Logic.UserProcessor();
+                    userDepartments = userProcessor.GetUserDepartments("1");
+                    if (userDepartments.IsSuccessfull)
+                    {
+                        ViewBag.UserDepartments = userDepartments.departments;
+                    }
+                    else
+                    {
+                        ViewBag.Error = userDepartments.Message;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = ex.Message;
+                }
+                return View();
+            }
         }
 
         public ActionResult ChangeUserPwd() 
@@ -133,7 +158,7 @@ namespace YassakoPortal.Controllers
                 user.FullName = firstname + " " + lastname;
                 user.PhoneNumber = Request["phone"].ToString();
                 user.RecodedBy = Session["Uname"].ToString();
-                user.UserCompany = Request["usercompany"].ToString();
+                //user.UserCompany = Request["usercompany"].ToString();
                 user.UserEmail = Request["username"].ToString();
                 user.Username = Request["username"].ToString();
                 user.Userrole = Request["userrole"].ToString();

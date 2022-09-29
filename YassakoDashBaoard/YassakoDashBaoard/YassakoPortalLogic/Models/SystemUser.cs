@@ -17,5 +17,8 @@ namespace YassakoPortalLogic.Models
         public string RecodedBy { get; set; }
         public bool Active { get; set; }
         public string UserPassword { get; set; }
+        public string Designation { get; set; }
+        public string Section { get; set; }
+        public string SectionId { get; set; }
     }
 }

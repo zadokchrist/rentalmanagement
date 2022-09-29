@@ -108,7 +108,9 @@
     <Content Include="content\build\images\forward_enabled.png" />
     <Content Include="content\build\images\forward_enabled_hover.png" />
     <Content Include="content\build\images\loading.gif" />
+    <Content Include="content\build\images\logokhp.jpg" />
     <Content Include="content\build\images\minilogoyassako.png" />
+    <Content Include="content\build\images\khplogo.gif" />
     <Content Include="content\build\js\custom.js" />
     <Content Include="content\build\js\custom.min.js" />
     <Content Include="content\Site.css" />
@@ -3820,7 +3822,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LandlordController.cs" />
     <Compile Include="Controllers\LoanController.cs" />
+    <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -4880,6 +4884,11 @@
     <Content Include="Views\Loan\LoanStatus.cshtml" />
     <Content Include="Views\Loan\RepaymentHistory.cshtml" />
     <Content Include="Views\User\ChangeUserPwd.cshtml" />
+    <Content Include="Views\Landlord\AddLandlord.cshtml" />
+    <Content Include="Views\Landlord\ViewLandlords.cshtml" />
+    <Content Include="Views\Property\AddProperty.cshtml" />
+    <Content Include="Views\Property\ViewProperties.cshtml" />
+    <Content Include="Views\Property\AddTenant.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

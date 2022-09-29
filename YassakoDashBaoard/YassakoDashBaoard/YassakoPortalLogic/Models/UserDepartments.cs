@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace YassakoPortalLogic.Models
 {
-    public class GenericResponse
+    public class UserDepartments : GenericResponse
     {
-        public bool IsSuccessfull { get; set; }
-        public string Message { get; set; }
-        public List<Object> list { get; set; }
+        public List<Department> departments { get; set; }
     }
 }

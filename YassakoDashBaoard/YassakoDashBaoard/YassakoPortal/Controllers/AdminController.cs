@@ -11,9 +11,9 @@ namespace YassakoPortal.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            GetOverDueLoans();
-            GetUnPaidLoans();
-            GetAggregatorBalance();
+            //GetOverDueLoans();
+            //GetUnPaidLoans();
+            //GetAggregatorBalance();
             return View();
         }
 
@@ -21,18 +21,18 @@ namespace YassakoPortal.Controllers
         {
             try
             {
-                YassakoPortalLogic.Logic.BalanceProcessor balanceProcessor = new YassakoPortalLogic.Logic.BalanceProcessor();
-                YassakoPortalLogic.Models.BalanceResponse response = new YassakoPortalLogic.Models.BalanceResponse();
-                response = balanceProcessor.GetUtilityAccountBalance();
-                if (response.IsSuccessfull)
-                {
-                    ViewBag.UtilityBalance = (double.Parse(response.Balance)+15000000).ToString();
-                    ViewBag.Commission = response.Commission;
-                }
-                else
-                {
-                    ViewBag.Error = response.Message;
-                }
+                //YassakoPortalLogic.Logic.BalanceProcessor balanceProcessor = new YassakoPortalLogic.Logic.BalanceProcessor();
+                //YassakoPortalLogic.Models.BalanceResponse response = new YassakoPortalLogic.Models.BalanceResponse();
+                //response = balanceProcessor.GetUtilityAccountBalance();
+                //if (response.IsSuccessfull)
+                //{
+                //    ViewBag.UtilityBalance = (double.Parse(response.Balance)+15000000).ToString();
+                //    ViewBag.Commission = response.Commission;
+                //}
+                //else
+                //{
+                //    ViewBag.Error = response.Message;
+                //}
             }
             catch (Exception ex)
             {

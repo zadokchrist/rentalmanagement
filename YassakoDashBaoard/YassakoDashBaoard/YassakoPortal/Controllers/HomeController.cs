@@ -15,35 +15,35 @@ namespace YassakoPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(FormCollection login)
+        public ActionResult Index(FormCollection form)
         {
             try
             {
-                YassakoPortalLogic.Models.SystemUser user = new YassakoPortalLogic.Models.SystemUser();
-                user.Username = Request.Form["username"];
-                user.UserPassword = Request.Form["password"];
-                YassakoPortalLogic.Logic.UserProcessor userProcessor = new YassakoPortalLogic.Logic.UserProcessor(user);
-                YassakoPortalLogic.Models.UserSearchResult searchResult = new YassakoPortalLogic.Models.UserSearchResult();
-                searchResult = userProcessor.LoginDetails();
-                if (searchResult.IsSuccessfull)
+                YassakoPortalLogic.Models.SystemUser systemUser = new YassakoPortalLogic.Models.SystemUser();
+                YassakoPortalLogic.Models.UserSearchResult userSearchResult = new YassakoPortalLogic.Models.UserSearchResult();
+                systemUser.Username = Request["username"];
+                systemUser.UserPassword = Request["password"];
+                YassakoPortalLogic.Logic.UserProcessor userProcessor = new YassakoPortalLogic.Logic.UserProcessor(systemUser);
+                userSearchResult = userProcessor.LoginDetails();
+                if (userSearchResult.IsSuccessfull)
                 {
-                    List<YassakoPortalLogic.Models.SystemUser> systemUsers = new List<YassakoPortalLogic.Models.SystemUser>();
-                    systemUsers = searchResult.results;
-                    Session["Uid"] = systemUsers[0].UserEmail;
-                    Session["Uname"] = systemUsers[0].Username;
-                    Session["FullName"] = systemUsers[0].FullName;
-                    Session["Utype"] = systemUsers[0].UserCompany;
-                    Session["UserRole"] = systemUsers[0].Userrole;
+                    Session["Uid"] = userSearchResult.results[0].Username;
+                    Session["Uname"] = userSearchResult.results[0].Username;
+                    Session["FullName"] = userSearchResult.results[0].FullName;
+                    Session["UserRole"] = userSearchResult.results[0].Userrole;
+                    Session["UserEmail"] = userSearchResult.results[0].UserEmail;
+                    Session["UserDepartment"] = userSearchResult.results[0].UserCompany;
+                    Session["Section"] = userSearchResult.results[0].UserCompany;
                     return RedirectToAction("Index", "Admin");
                 }
                 else
                 {
-                    ViewBag.Message = searchResult.Message;
+                    ViewBag.Error = userSearchResult.Message;
                 }
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.Message;
+                ViewBag.Error = ex.Message;
             }
             return View();
         }

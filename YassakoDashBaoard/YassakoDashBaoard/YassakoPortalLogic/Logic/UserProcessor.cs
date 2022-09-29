@@ -21,6 +21,9 @@ namespace YassakoPortalLogic.Logic
             this.user = user;
         }
 
+        public UserProcessor()
+        { }
+
         public GenericResponse ChangeUserPassword(string newpwd,string pwdrepeat)
         {
             GenericResponse response = new GenericResponse();
@@ -70,6 +73,82 @@ namespace YassakoPortalLogic.Logic
                 response.Message = ex.Message;
             }
             return response;
+        }
+
+        public UserDepartments GetUserDepartments(string status)
+        {
+            UserDepartments departments = new UserDepartments();
+            try
+            {
+                table = dh.GetUserDepartments(status);
+                if (table.Rows.Count > 0)
+                {
+                    List<Department> departments1 = new List<Department>();
+                    foreach (DataRow dr in table.Rows)
+                    {
+                        Department department = new Department();
+                        department.RecordId = dr["RecordId"].ToString();
+                        department.DepartmentName = dr["DepartmentName"].ToString();
+                        department.Departmentemail = dr["DepartmentEmail"].ToString();
+                        department.Status = dr["Status"].ToString();
+                        department.RecordDate = dr["RecordDate"].ToString();
+                        department.RecordedBy = dr["RecordedBy"].ToString();
+                        departments1.Add(department);
+                    }
+                    departments.IsSuccessfull = true;
+                    departments.Message = "SUCCESS";
+                    departments.departments = departments1;
+                }
+                else
+                {
+                    departments.IsSuccessfull = false;
+                    departments.Message = "NO USER DEPARTMENTS FOUND";
+                }
+            }
+            catch (Exception ex)
+            {
+                departments.IsSuccessfull = false;
+                departments.Message = ex.Message;
+            }
+            return departments;
+        }
+
+        public UserDepartments GetUserDepartmentsById(string departmentid)
+        {
+            UserDepartments departments = new UserDepartments();
+            try
+            {
+                table = dh.GetUserDepartmentsById(departmentid);
+                if (table.Rows.Count > 0)
+                {
+                    List<Department> departments1 = new List<Department>();
+                    foreach (DataRow dr in table.Rows)
+                    {
+                        Department department = new Department();
+                        department.RecordId = dr["RecordId"].ToString();
+                        department.DepartmentName = dr["DepartmentName"].ToString();
+                        department.Departmentemail = dr["DepartmentEmail"].ToString();
+                        department.Status = dr["Status"].ToString();
+                        department.RecordDate = dr["RecordDate"].ToString();
+                        department.RecordedBy = dr["RecordedBy"].ToString();
+                        departments1.Add(department);
+                    }
+                    departments.IsSuccessfull = true;
+                    departments.Message = "SUCCESS";
+                    departments.departments = departments1;
+                }
+                else
+                {
+                    departments.IsSuccessfull = false;
+                    departments.Message = "NO USER DEPARTMENTS FOUND";
+                }
+            }
+            catch (Exception ex)
+            {
+                departments.IsSuccessfull = false;
+                departments.Message = ex.Message;
+            }
+            return departments;
         }
         /// <summary>
         /// Resets system user
@@ -222,7 +301,7 @@ namespace YassakoPortalLogic.Logic
                                 SystemUser systemUser = new SystemUser();
                                 systemUser.FullName = dr["FullName"].ToString();
                                 systemUser.PhoneNumber = dr["PhoneNumber"].ToString();
-                                systemUser.UserCompany = dr["UserCompany"].ToString();
+                                systemUser.UserCompany = dr["UserDepartment"].ToString();
                                 systemUser.UserEmail = dr["UserEmail"].ToString();
                                 systemUser.Username = dr["Username"].ToString();
                                 systemUser.Userrole = dr["Userrole"].ToString();
@@ -238,14 +317,14 @@ namespace YassakoPortalLogic.Logic
                             searchResult.IsSuccessfull = false;
                             searchResult.Message = "USER WAS DISABLED PLEASE CONTACT SYSTEM ADMINISTRATOR";
                         }
-                        
+
                     }
                     else
                     {
                         searchResult.IsSuccessfull = false;
                         searchResult.Message = "INVALID LOGIN CREDENTIALS";
                     }
-                    
+
                 }
                 else
                 {
@@ -265,6 +344,10 @@ namespace YassakoPortalLogic.Logic
         /// Creates users in the system
         /// </summary>
         /// <returns></returns>
+        /// <summary>
+        /// Creates users in the system
+        /// </summary>
+        /// <returns></returns>
         public GenericResponse RegisterUser()
         {
             GenericResponse resp = new GenericResponse();
@@ -279,11 +362,6 @@ namespace YassakoPortalLogic.Logic
                 {
                     resp.IsSuccessfull = false;
                     resp.Message = "USER NAME REQUIRED";
-                }
-                else if (string.IsNullOrEmpty(user.PhoneNumber))
-                {
-                    resp.IsSuccessfull = false;
-                    resp.Message = "PHONE NUMBER REQUIRED";
                 }
                 else if (string.IsNullOrEmpty(user.UserEmail))
                 {
@@ -300,30 +378,30 @@ namespace YassakoPortalLogic.Logic
                     resp.IsSuccessfull = false;
                     resp.Message = "INVALID EMAIL ADDRESS";
                 }
-                else if (!user.Username.Equals(user.UserEmail))
+                else if (string.IsNullOrEmpty(user.Section))
                 {
                     resp.IsSuccessfull = false;
-                    resp.Message = "USERNAME SHOULD BE THE SAME AS EMAIL";
+                    resp.Message = "PLEASE ENTER USER SECTION";
                 }
                 else
                 {
+                    user.Username = user.UserEmail;
                     string randomPassword = CreatePassword(8);
                     user.UserPassword = MD5Hash(randomPassword);
-                    dh.RegisterUser(user.FullName, user.Username, user.UserEmail, user.UserCompany, user.Userrole, user.RecodedBy, user.UserPassword, user.PhoneNumber);
+                    dh.RegisterUser(user.FullName, user.Username, user.UserEmail, user.UserCompany, user.Userrole, user.RecodedBy, user.UserPassword, user.PhoneNumber, user.Section);
                     resp.IsSuccessfull = true;
                     resp.Message = "SUCCESS";
                     dh.LogAuditTrail(user.Username, "registered user  with username : " + user.Username + " and email : " + user.UserEmail);
-                    string Name = "";
-                    string Message = "Dear "+Name+",<br>Please find below are your yassako user credentials. Please remember to change them on your initial login<br>";
-                    Message += "User name : "+ user.Username+"<br>User Password : "+ randomPassword;
-                    resp = sendEmail.SendEmail(Name, user.Username,"YASSAKO USER CREDENTIALS",Message);
+                    string Message = "Dear " + user.FullName + ",<br>Please find below are your yassako user credentials. Please remember to change them on your initial login<br>";
+                    Message += "User name : " + user.Username + "<br>User Password : " + randomPassword;
+                    resp = sendEmail.SendEmail(user.FullName, user.Username, "USER CREDENTIALS", Message);
                     if (resp.IsSuccessfull)
                     {
                         resp.Message = "User details have been captured successfully and email sent to user with details";
                     }
                     else
                     {
-                        resp.Message = "User details sent successfully but email has not been sent. Error : "+resp.Message;
+                        resp.Message = "User details sent successfully but email has not been sent. Error : " + resp.Message;
                     }
 
                 }
@@ -337,6 +415,9 @@ namespace YassakoPortalLogic.Logic
             }
             return resp;
         }
+
+
+        
         /// <summary>
         /// Generates a random password for the new user and the user who's password has been reset
         /// </summary>
